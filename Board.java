@@ -1,6 +1,10 @@
 public class Board {
-    private final int SIZE = 3;
+    public static final int SIZE = 3;
     private char[][] gameBoard = new char[SIZE][SIZE];
+
+    public char[][] getGameBoard() {
+        return gameBoard;
+    }
 
     public Board() {
         for (int i = 0; i < SIZE; i++) {
@@ -13,9 +17,8 @@ public class Board {
     public void displayBoard() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                System.out.println(gameBoard[i][j] + " ");
+                System.out.print(gameBoard[i][j] + " ");
             }
-
             System.out.println();
         }
 
