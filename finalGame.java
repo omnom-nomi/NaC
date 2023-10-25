@@ -9,7 +9,6 @@ public class finalGame {
             gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
-                System.out.println("You win.");
                 break;
             }
 
@@ -17,17 +16,33 @@ public class finalGame {
             gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
-                System.out.println("The computer wins.");
                 break;
             }
 
         }
 
         gameBoard.displayBoard();
+
     }
 
     public static boolean gameOver(Board board) {
+        char winner = board.checkWinner();
+        if (winner == 'x') {
+            System.out.println("You win.");
+        } else if (winner == 'o') {
+            System.out.println("The computer wins.");
+            return true;
+        }
 
-        return false;
+        for (int i = 0; i < Board.SIZE; i++) {
+            for (int j = 0; j < Board.SIZE; j++) {
+                if (board.getGameBoard()[i][j] == '-') {
+                    return false;
+                }
+            }
+        }
+
+        System.out.println("It's a draw");
+        return true;
     }
 }

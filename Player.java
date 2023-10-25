@@ -11,19 +11,19 @@ public class Player {
     public boolean makeMove() {
         while (true) {
 
-            System.out.println("Please enter the row");
+            System.out.println("Please enter the row: ");
             int row = sc.nextInt();
-            System.out.println("Please enter the column");
+            System.out.println("Please enter the column: ");
             int column = sc.nextInt();
 
             if (row < 0 || column < 0 || row >= Board.SIZE || column >= Board.SIZE) {
-                System.out.println("Out of bounds;");
+                System.out.println("Out of bounds.");
                 continue;
-            } else if (gameBoard.getGameBoard()[column][row] != '-') {
-                System.out.println("That space has already been taken");
+            } else if (gameBoard.getGameBoard()[row][column] != '-') {
+                System.out.println("That space has already been taken.");
                 continue;
             } else {
-                gameBoard.placeMove(column, row, 'x');
+                gameBoard.placeMove(row, column, 'x');
                 return true;
             }
         }
