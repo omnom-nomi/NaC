@@ -13,15 +13,13 @@ public class finalGame {
             }
 
             comp.makeMove();
-            gameBoard.displayBoard();
+            // gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
                 break;
             }
 
         }
-
-        gameBoard.displayBoard();
 
     }
 

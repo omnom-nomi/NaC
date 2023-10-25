@@ -23,7 +23,7 @@ public class Player {
                 System.out.println("That space has already been taken.");
                 continue;
             } else {
-                gameBoard.placeMove(column, row, 'x');
+                gameBoard.placeMove(row, column, 'x');
                 return true;
             }
         }
