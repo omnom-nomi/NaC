@@ -26,7 +26,7 @@ public class Board {
 
     public boolean placeMove(int row, int column, char b) {
         if (row >= 0 && row < SIZE && column >= 0 && column < SIZE && gameBoard[row][column] == '-') {
-            gameBoard[column][row] = b;
+            gameBoard[row][column] = b;
             return true;
         } else {
             return false;
