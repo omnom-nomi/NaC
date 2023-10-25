@@ -33,4 +33,9 @@ public class Board {
         }
     }
 
+    public char checkWinner() {
+
+        return '-';
+    }
+
 }

@@ -3,5 +3,11 @@ public class finalGame {
         Board gameBoard = new Board();
         Player person = new Player(gameBoard);
         Computer comp = new Computer(gameBoard);
+
+        while (true) {
+            person.makeMove();
+            gameBoard.displayBoard();
+        }
+
     }
 }
