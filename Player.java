@@ -12,18 +12,18 @@ public class Player {
         while (true) {
 
             System.out.println("Please enter the row");
-            int a = sc.nextInt();
+            int row = sc.nextInt();
             System.out.println("Please enter the column");
-            int b = sc.nextInt();
+            int column = sc.nextInt();
 
-            if (a < 0 || b < 0 || a >= Board.SIZE || b >= Board.SIZE) {
+            if (row < 0 || column < 0 || row >= Board.SIZE || column >= Board.SIZE) {
                 System.out.println("Out of bounds;");
                 continue;
-            } else if (gameBoard.getGameBoard()[a][b] != '-') {
+            } else if (gameBoard.getGameBoard()[column][row] != '-') {
                 System.out.println("Someone already took that space");
                 continue;
             } else {
-                gameBoard.placeMove(a, b, 'x');
+                gameBoard.placeMove(column, row, 'x');
                 return true;
             }
         }
