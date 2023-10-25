@@ -4,21 +4,26 @@ public class finalGame {
         Player person = new Player(gameBoard);
         Computer comp = new Computer(gameBoard);
 
-        while (true) {
+        boolean gameEnded = false;
+
+        while (!gameEnded) {
             person.makeMove();
             gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
-                break;
+                gameEnded = true;
+                continue;
             }
 
             comp.makeMove();
             // gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
-                break;
+                gameEnded = true;
             }
+
         }
+        gameBoard.displayBoard();
     }
 
     public static boolean gameOver(Board board) {
