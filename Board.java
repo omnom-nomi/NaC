@@ -34,7 +34,11 @@ public class Board {
     }
 
     public char checkWinner() {
-
+        for (int i = 0; i < SIZE; i++) {
+            if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2] && gameBoard[i][0] != '-') {
+                return gameBoard[i][0];
+            }
+        }
         return '-';
     }
 

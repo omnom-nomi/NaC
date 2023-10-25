@@ -20,7 +20,7 @@ public class Player {
                 System.out.println("Out of bounds;");
                 continue;
             } else if (gameBoard.getGameBoard()[column][row] != '-') {
-                System.out.println("Someone already took that space");
+                System.out.println("That space has already been taken");
                 continue;
             } else {
                 gameBoard.placeMove(column, row, 'x');
