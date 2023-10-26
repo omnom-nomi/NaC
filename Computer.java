@@ -6,5 +6,14 @@ public class Computer {
     }
 
     public void makeMove() {
+
+    }
+
+    private boolean tryToWin(char player) {
+        return false;
+    }
+
+    private boolean placeMove(int i, int j, char player) {
+        return false;
     }
 }

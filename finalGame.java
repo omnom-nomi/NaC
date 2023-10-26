@@ -5,10 +5,10 @@ public class finalGame {
         Computer comp = new Computer(gameBoard);
 
         boolean gameEnded = false;
+        gameBoard.displayBoard();
 
         while (!gameEnded) {
             person.makeMove();
-            gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
                 gameEnded = true;
@@ -16,17 +16,16 @@ public class finalGame {
             }
 
             comp.makeMove();
-            // gameBoard.displayBoard();
 
             if (gameOver(gameBoard)) {
                 gameEnded = true;
             }
-
         }
-        gameBoard.displayBoard();
     }
 
     public static boolean gameOver(Board board) {
+        board.displayBoard(); // Display the board here.
+
         char winner = board.checkWinner();
 
         if (winner == 'x') {
