@@ -1,6 +1,8 @@
 public class Computer {
 
     private Board board;
+    private static final char computer = 'o';
+    private static final char player = 'x';
 
     public Computer(Board board) {
         this.board = board;
@@ -8,15 +10,15 @@ public class Computer {
 
     public void makeMove() {
         int bestScore = Integer.MIN_VALUE;
-        int[] bestMove = { -1, -1 }; // to store the best move coordinates
+        int[] bestMove = { -1, -1 };
 
         for (int i = 0; i < Board.SIZE; i++) {
             for (int j = 0; j < Board.SIZE; j++) {
-                // Check if the cell is empty
                 if (board.getGameBoard()[i][j] == '-') {
-                    board.getGameBoard()[i][j] = 'o'; // place 'o' for computer's move
-                    int score = minimax(false); // false because next move is the player's move
-                    board.getGameBoard()[i][j] = '-'; // reset cell
+                    board.getGameBoard()[i][j] = computer;
+                    int score = minimax(0, false);
+                    board.getGameBoard()[i][j] = '-';
+
                     if (score > bestScore) {
                         bestScore = score;
                         bestMove[0] = i;
@@ -25,41 +27,43 @@ public class Computer {
                 }
             }
         }
-        board.placeMove(bestMove[0], bestMove[1], 'o'); // place the best move for the computer
+
+        board.placeMove(bestMove[0], bestMove[1], computer);
     }
 
-    public int minimax(boolean isMaximizing) {
-        char winner = board.checkWinner();
-        if (winner == 'x') {
-            return -10; // player wins, so it's a bad outcome for the computer
-        } else if (winner == 'o') {
-            return 10; // computer wins
-        } else if (finalGame.isDraw(board)) {
-            return 0; // it's a draw
+    private int minimax(int depth, boolean isMaximizing) {
+        char result = board.checkWinner();
+        if (result != ' ') {
+            if (result == computer)
+                return 10;
+            else if (result == player)
+                return -10;
+            else
+                return 0;
         }
 
         if (isMaximizing) {
             int bestScore = Integer.MIN_VALUE;
+
             for (int i = 0; i < Board.SIZE; i++) {
                 for (int j = 0; j < Board.SIZE; j++) {
                     if (board.getGameBoard()[i][j] == '-') {
-                        board.getGameBoard()[i][j] = 'o';
-                        int score = minimax(false);
+                        board.getGameBoard()[i][j] = computer;
+                        bestScore = Math.max(bestScore, minimax(depth + 1, false));
                         board.getGameBoard()[i][j] = '-';
-                        bestScore = Math.max(bestScore, score);
                     }
                 }
             }
             return bestScore;
         } else {
             int bestScore = Integer.MAX_VALUE;
+
             for (int i = 0; i < Board.SIZE; i++) {
                 for (int j = 0; j < Board.SIZE; j++) {
                     if (board.getGameBoard()[i][j] == '-') {
-                        board.getGameBoard()[i][j] = 'x';
-                        int score = minimax(true);
+                        board.getGameBoard()[i][j] = player;
+                        bestScore = Math.min(bestScore, minimax(depth + 1, true));
                         board.getGameBoard()[i][j] = '-';
-                        bestScore = Math.min(bestScore, score);
                     }
                 }
             }
