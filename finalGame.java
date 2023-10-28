@@ -8,6 +8,7 @@ public class finalGame {
         gameBoard.displayBoard();
 
         while (!gameEnded) {
+            System.out.println("It's your turn:");
             person.makeMove();
 
             if (gameOver(gameBoard)) {
@@ -15,6 +16,7 @@ public class finalGame {
                 continue;
             }
 
+            System.out.println("It's the computer turn:");
             comp.makeMove();
 
             if (gameOver(gameBoard)) {

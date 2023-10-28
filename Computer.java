@@ -1,61 +1,69 @@
 public class Computer {
-    private Board gameBoard;
+
+    private Board board;
 
     public Computer(Board board) {
-        this.gameBoard = board;
+        this.board = board;
     }
 
     public void makeMove() {
-        if (tryToWin('o'))
-            return;
-        if (tryToWin('x'))
-            return;
-        if (placeMove(1, 1, 'o'))
-            return;
-        if (takeCorner('o'))
-            return;
+        int bestScore = Integer.MIN_VALUE;
+        int[] bestMove = { -1, -1 }; // to store the best move coordinates
 
         for (int i = 0; i < Board.SIZE; i++) {
             for (int j = 0; j < Board.SIZE; j++) {
-                if (placeMove(i, i, 'o'))
-                    return;
-            }
-        }
-    }
-
-    private boolean tryToWin(char player) {
-        for (int i = 0; i < Board.SIZE; i++) {
-            for (int j = 0; j < Board.SIZE; j++) {
-                if (gameBoard.getGameBoard()[i][j] == '-') {
-                    gameBoard.placeMove(i, j, player);
-                    if (gameBoard.checkWinner() == player) {
-                        if (player == 'x') {
-                            gameBoard.placeMove(i, j, '-');
-                        }
-                        return true;
+                // Check if the cell is empty
+                if (board.getGameBoard()[i][j] == '-') {
+                    board.getGameBoard()[i][j] = 'o'; // place 'o' for computer's move
+                    int score = minimax(false); // false because next move is the player's move
+                    board.getGameBoard()[i][j] = '-'; // reset cell
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove[0] = i;
+                        bestMove[1] = j;
                     }
-
-                    gameBoard.placeMove(i, j, '-');
                 }
             }
         }
-        return false;
+        board.placeMove(bestMove[0], bestMove[1], 'o'); // place the best move for the computer
     }
 
-    private boolean placeMove(int i, int j, char player) {
-        if (gameBoard.getGameBoard()[i][j] == '-') {
-            gameBoard.placeMove(i, j, player);
-            return true;
+    public int minimax(boolean isMaximizing) {
+        char winner = board.checkWinner();
+        if (winner == 'x') {
+            return -10; // player wins, so it's a bad outcome for the computer
+        } else if (winner == 'o') {
+            return 10; // computer wins
+        } else if (finalGame.isDraw(board)) {
+            return 0; // it's a draw
         }
-        return false;
-    }
 
-    private boolean takeCorner(char player) {
-        int[][] corners = { { 0, 0 }, { 0, 2 }, { 2, 0 }, { 2, 2 } };
-        for (int[] corner : corners) {
-            if (placeMove(corner[0], corner[1], player))
-                ;
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    if (board.getGameBoard()[i][j] == '-') {
+                        board.getGameBoard()[i][j] = 'o';
+                        int score = minimax(false);
+                        board.getGameBoard()[i][j] = '-';
+                        bestScore = Math.max(bestScore, score);
+                    }
+                }
+            }
+            return bestScore;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    if (board.getGameBoard()[i][j] == '-') {
+                        board.getGameBoard()[i][j] = 'x';
+                        int score = minimax(true);
+                        board.getGameBoard()[i][j] = '-';
+                        bestScore = Math.min(bestScore, score);
+                    }
+                }
+            }
+            return bestScore;
         }
-        return false;
     }
 }

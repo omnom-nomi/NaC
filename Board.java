@@ -21,7 +21,6 @@ public class Board {
             }
             System.out.println();
         }
-
     }
 
     public boolean placeMove(int row, int column, char player) {
