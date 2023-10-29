@@ -48,6 +48,22 @@ public class Board {
         if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][0] && gameBoard[0][2] != '-') {
             return gameBoard[0][2];
         }
+
+        boolean isTie = true;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (gameBoard[i][j] == '-') {
+                    isTie = false;
+                    break;
+                }
+            }
+            if (!isTie)
+                break;
+        }
+
+        if (isTie) {
+            return 'T';
+        }
         return ' ';
     }
 

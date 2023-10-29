@@ -35,10 +35,10 @@ public class Computer {
         char result = board.checkWinner();
         if (result != ' ') {
             if (result == computer)
-                return 10;
+                return 10 - depth;
             else if (result == player)
-                return -10;
-            else
+                return -10 + depth;
+            else if (result == 'T')
                 return 0;
         }
 
