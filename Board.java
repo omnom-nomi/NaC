@@ -49,19 +49,19 @@ public class Board {
             return gameBoard[0][2];
         }
 
-        boolean isTie = true;
+        boolean isDraw = true;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (gameBoard[i][j] == '-') {
-                    isTie = false;
+                    isDraw = false;
                     break;
                 }
             }
-            if (!isTie)
+            if (!isDraw)
                 break;
         }
 
-        if (isTie) {
+        if (isDraw) {
             return 'T';
         }
         return ' ';
