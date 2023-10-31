@@ -30,7 +30,7 @@ public class Player {
                     return true;
                 }
             } catch (Exception e) {
-                System.err.println("Invalid input. Try again");
+                System.err.println("Invalid input. Try again.");
                 sc.nextLine();
             }
         }
